@@ -1,13 +1,13 @@
 from config.updateConfig import UpdateConfig
 
-sampleCONF = {
+gameCONF = {
     "task": {
-        "name": "sample",
+        "name": "Game",
+        "duration": 10*60,
     },
     "instructions": {
-        "text": "Give instructions",
+        "text": "Please play the tablet game until told otherwise.",
         "startPrompt": "Press any key to continue. Press q to quit.",
-        "alarm": "horn.wav",
         "questionnaireReminder": "answerQuestionnaire.wav"
     },
     "stimuli": {
@@ -15,13 +15,7 @@ sampleCONF = {
     },
 }
 
-sampleTriggers = {
-    "example": 10
-}
-
-
 updateCofig = UpdateConfig()
-updateCofig.addContent(sampleCONF)
-updateCofig.addTriggers(sampleTriggers)
+updateCofig.addContent(gameCONF)
 
 CONF = updateCofig.getConfig()

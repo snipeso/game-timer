@@ -7,7 +7,6 @@ import sys
 import math
 
 from screen import Screen
-from scorer import Scorer
 from trigger import Trigger
 from psychopy import core, event, sound
 from psychopy.hardware import keyboard
@@ -48,8 +47,6 @@ alarm = sound.Sound(os.path.join('sounds', CONF["instructions"]["alarm"]),
 
 questionnaireReminder = sound.Sound(os.path.join(
     'sounds', CONF["instructions"]["questionnaireReminder"]), stereo=True)
-
-scorer = Scorer()
 
 
 logging.info('Initialization completed')
@@ -115,14 +112,14 @@ core.wait(CONF["timing"]["cue"])
 # Main experiment
 #################
 
-# customize
-datalog["trialID"] = trigger.sendTriggerId()
-eyetracker.send_trigger("Stim", {"id": 1, "condition": "sample"})
+gameTimer = core.CountdownTimer(CONF["task"]["duration"])
 
-datalog["pupilSize"] = eyetracker.getPupildiameter()
+while gameTimer > 0:
+    key = kb.getKeys()
+    if key:
+        quitExperimentIf(key[0].name == 'q')
 
-# save data to file
-datalog.flush()
+    core.wait(1)
 
 ###########
 # Concluion
