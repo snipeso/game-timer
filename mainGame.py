@@ -12,7 +12,7 @@ from psychopy import core, event, sound
 from psychopy.hardware import keyboard
 from pupil_labs import PupilCore
 from datalog import Datalog
-from config.configSample import CONF
+from config.configGame import CONF
 
 #########################################################################
 
