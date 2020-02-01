@@ -41,12 +41,11 @@ kb = keyboard.Keyboard()
 
 mainClock = core.MonotonicClock()  # starts clock for timestamping events
 
-alarm = sound.Sound(os.path.join('sounds', CONF["instructions"]["alarm"]),
-                    stereo=True)
-
 questionnaireReminder = sound.Sound(os.path.join(
     'sounds', CONF["instructions"]["questionnaireReminder"]), stereo=True)
 
+endTask = sound.Sound(os.path.join(
+    'sounds', CONF["instructions"]["endPrompt"]), stereo=True)
 
 logging.info('Initialization completed')
 
@@ -58,7 +57,6 @@ def quitExperimentIf(shouldQuit):
 
     if shouldQuit:
         trigger.send("Quit")
-        scorer.getScore()
         logging.info('quit experiment')
         eyetracker.stop_recording()
         trigger.reset()
@@ -82,7 +80,6 @@ screen.show_overview()
 core.wait(CONF["timing"]["overview"])
 
 # Optionally, display instructions
-print(CONF["showInstructions"], CONF["version"])
 if CONF["showInstructions"]:
     screen.show_instructions()
     key = event.waitKeys()
@@ -112,13 +109,15 @@ core.wait(CONF["timing"]["cue"])
 #################
 
 gameTimer = core.CountdownTimer(CONF["task"]["duration"])
-
-while gameTimer > 0:
+screen.show_blank()
+while gameTimer.getTime() > 0:
     key = kb.getKeys()
     if key:
         quitExperimentIf(key[0].name == 'q')
 
     core.wait(1)
+
+endTask.play()
 
 ###########
 # Concluion
@@ -139,7 +138,6 @@ trigger.send("EndBlank")
 
 
 logging.info('Finished')
-scorer.getScore()
 trigger.reset()
 eyetracker.stop_recording()
 
