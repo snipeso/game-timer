@@ -34,7 +34,6 @@ trigger = Trigger(CONF["trigger"]["serial_device"],
 
 screen = Screen(CONF)
 
-
 datalog = Datalog(OUTPUT_FOLDER=os.path.join(
     'output', CONF["participant"] + "_" + CONF["session"]), CONF=CONF)  # This is for saving data TODO: apply everywhere
 
