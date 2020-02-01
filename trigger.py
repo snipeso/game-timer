@@ -1,5 +1,4 @@
 import serial
-import parallel
 import time
 import logging
 
@@ -13,8 +12,7 @@ class Trigger:
         if shouldTrigger:
             if "COM" in serial_device:
                 self._port = serial.Serial(serial_device)
-            else:
-                self._port = parallel.Parallel()
+
 
         self.shouldTrigger = shouldTrigger
 
