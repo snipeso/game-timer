@@ -44,6 +44,9 @@ mainClock = core.MonotonicClock()  # starts clock for timestamping events
 questionnaireReminder = sound.Sound(os.path.join(
     'sounds', CONF["instructions"]["questionnaireReminder"]), stereo=True)
 
+startTask = sound.Sound(os.path.join(
+    'sounds', CONF["instructions"]["startPrompt"]), stereo=True)
+
 endTask = sound.Sound(os.path.join(
     'sounds', CONF["instructions"]["endPrompt"]), stereo=True)
 
@@ -110,6 +113,7 @@ core.wait(CONF["timing"]["cue"])
 
 gameTimer = core.CountdownTimer(CONF["task"]["duration"])
 screen.show_blank()
+startTask.play()
 while gameTimer.getTime() > 0:
     key = kb.getKeys()
     if key:

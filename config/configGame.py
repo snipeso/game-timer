@@ -7,7 +7,7 @@ gameCONF = {
     },
     "instructions": {
         "text": "Please play the tablet game until told otherwise.",
-        "startPrompt": "Press any key to continue. Press q to quit.",
+        "startPrompt": "start.wav",
         "endPrompt": "end.wav",
         "questionnaireReminder": "answerQuestionnaire.wav"
     },
